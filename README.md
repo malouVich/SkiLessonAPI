@@ -26,7 +26,7 @@ This project is a system for managing ski lessons. It allows you to add and mana
 
 ## Additional Notes
 
-- The `dev.http` file provides a set of pre-configured requests that can be used to interact with the system.
+- The `dev.http` file provides a set of pre-configured requests that can be used to interact with the system. And can be found under the package resources and package http.
 - The server runs on port `7070` by default, but you can modify this in the application configuration if needed.
 
 ---
