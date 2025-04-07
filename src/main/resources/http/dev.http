@@ -1,0 +1,127 @@
+### A simple get request to the test endpoint. No need for login
+GET {{url}}/auth/test/
+
+### Populate the database with some data
+GET {{url}}/skilessons/populate/
+
+### Create a new user - this one will only get a USER role by default
+POST {{url}}/auth/register/
+
+{
+    "username": "user",
+    "password": "test123"
+}
+
+###
+POST {{url}}/auth/login/
+
+{
+    "username": "user",
+    "password": "test123"
+}
+
+> {%
+    client.global.set("jwt_token", response.body.token);
+    console.log("JWT Token:", client.global.get("jwt_token"));
+%}
+
+###
+GET {{url}}/protected/user_demo/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+###
+GET {{url}}/protected/admin_demo/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+
+###
+GET {{url}}/skilessons/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+###
+GET {{url}}/skilessons/level/advanced
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+###
+POST {{url}}/skilessons/
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+  "name": "Advanced Skiing",
+  "startTime": "13:00",
+  "endTime": "15:00",
+  "price": 75.0,
+  "level": "ADVANCED",
+  "location": {
+    "latitude": 45.764,
+    "longitude": 4.8357
+  },
+  "instructor": {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "email": "jane.smith@example.com",
+    "phone": "987654321",
+    "yearsOfExperience": 8,
+    "skiLessons": []
+  }
+}
+
+###
+PUT {{url}}/skilessons/3
+Content-Type: application/json
+
+{
+  "name": "Advanced Skiing",
+  "startTime": "13:00",
+  "endTime": "15:00",
+  "price": 75.0,
+  "level": "ADVANCED",
+  "location": {
+    "latitude": 45.764,
+    "longitude": 4.8357
+  },
+  "instructor": {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "email": "jane.smith@example.com",
+    "phone": "987654321",
+    "yearsOfExperience": 8,
+    "skiLessons": []
+  }
+}
+
+
+
+###
+PUT {{url}}/skilessons/4/instructors/2
+Content-Type: application/json
+
+
+###
+DELETE {{url}}/skilessons/3
+Authorization: Bearer {{jwt_token}}
+
+// Room API
+###
+GET {{url}}/rooms
+Authorization: Bearer {{jwt_token}}
+
+###
+GET {{url}}/rooms/1
+Authorization: Bearer {{jwt_token}}
+
+###
+POST {{url}}/rooms/hotel/1
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+  "roomNumber": 11,
+  "roomPrice": 1150,
+  "roomType": "SINGLE"
+}
