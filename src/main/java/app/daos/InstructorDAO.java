@@ -1,14 +1,13 @@
 package app.daos;
 
 import app.dtos.InstructorDTO;
-import app.dtos.SkiLessonDTO;
 import app.entities.Instructor;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
-import java.util.Set;
+
 
 public class InstructorDAO implements IDAO<InstructorDTO, Integer>{
 
@@ -44,7 +43,7 @@ public class InstructorDAO implements IDAO<InstructorDTO, Integer>{
     public InstructorDTO create(InstructorDTO instructorDTO) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            Instructor instructor = new Instructor(instructorDTO); // Du skal have denne constructor i din entity
+            Instructor instructor = new Instructor(instructorDTO);
             em.persist(instructor);
             em.getTransaction().commit();
             return new InstructorDTO(instructor);
@@ -92,8 +91,4 @@ public class InstructorDAO implements IDAO<InstructorDTO, Integer>{
             return instructor != null;
         }
     }
-
-
-    // Fjernes fordi dette DAO er for Instructor
-    // addInstructorToSkiLesson og getSkiLessonsByInstructor hører hjemme i SkiLessonDAO
 }

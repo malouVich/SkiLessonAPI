@@ -2,7 +2,6 @@ package app.dtos;
 
 import app.entities.SkiLesson;
 import app.enums.Levels;
-import jakarta.persistence.Embedded;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -30,7 +30,7 @@ public class InstructorDTO {
         if (instructor.getSkiLessons() != null) {
             this.skiLessons = instructor.getSkiLessons()
                     .stream()
-                    .map(SkiLessonDTO::new)  // Mapper SkiLesson til SkiLessonDTO
+                    .map(SkiLessonDTO::new)
                     .collect(Collectors.toSet());
         }
     }

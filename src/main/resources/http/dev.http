@@ -105,23 +105,3 @@ Content-Type: application/json
 ###
 DELETE {{url}}/skilessons/3
 Authorization: Bearer {{jwt_token}}
-
-// Room API
-###
-GET {{url}}/rooms
-Authorization: Bearer {{jwt_token}}
-
-###
-GET {{url}}/rooms/1
-Authorization: Bearer {{jwt_token}}
-
-###
-POST {{url}}/rooms/hotel/1
-Content-Type: application/json
-Authorization: Bearer {{jwt_token}}
-
-{
-  "roomNumber": 11,
-  "roomPrice": 1150,
-  "roomType": "SINGLE"
-}

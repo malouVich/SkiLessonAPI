@@ -5,9 +5,7 @@ import app.dtos.InstructorDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalTime;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity

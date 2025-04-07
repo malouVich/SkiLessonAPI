@@ -2,11 +2,9 @@ package app.daos;
 
 import app.dtos.LocationDTO;
 import app.dtos.SkiLessonDTO;
-import app.dtos.TotalPriceDTO;
 import app.entities.Instructor;
 import app.entities.SkiLesson;
 import app.enums.Levels;
-import app.exceptions.DaoException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -85,13 +83,10 @@ public class SkiLessonDAO implements IDAO<SkiLessonDTO, Integer>, ISkiLessonInst
 
         try {
             em.getTransaction().begin();
-
-            // Find den SkiLesson, du vil slette, ved hjælp af dens ID
             SkiLesson skiLesson = em.find(SkiLesson.class, integer);
 
-            // Hvis SkiLesson findes, fjernes den
             if (skiLesson != null) {
-                em.remove(skiLesson);  // Slet entiteten, ikke bare ID'et
+                em.remove(skiLesson);
             }
 
             em.getTransaction().commit();
@@ -162,18 +157,15 @@ public class SkiLessonDAO implements IDAO<SkiLessonDTO, Integer>, ISkiLessonInst
     public Set<SkiLessonDTO> getSkiLessonsByLevel(Levels level) {
         EntityManager em = emf.createEntityManager();
         try {
-            // JPQL Query for at hente skilektioner baseret på niveau
             TypedQuery<SkiLesson> query = em.createQuery(
                     "SELECT s FROM SkiLesson s WHERE s.level = :level", SkiLesson.class);
             query.setParameter("level", level);
 
-            // Hent resultaterne af queryen
             List<SkiLesson> lessons = query.getResultList();
 
-            // Brug streams til at konvertere SkiLesson objekter til SkiLessonDTO objekter
             return lessons.stream()
-                    .map(SkiLessonDTO::new)  // Mapper hver SkiLesson til en DTO
-                    .collect(Collectors.toSet());  // Samler dem i et Set
+                    .map(SkiLessonDTO::new)
+                    .collect(Collectors.toSet());
         } finally {
             em.close();
         }

@@ -20,21 +20,17 @@ public class Populator {
     }
 
     public void populateDatabase() {
-        // Create EntityManager to manage entities
         EntityManager em = emf.createEntityManager();
 
         try {
             em.getTransaction().begin();
 
-            // Create Instructors
             Instructor instructor1 = new Instructor("John", "Doe", "john.doe@example.com", "123456789", 5);
             Instructor instructor2 = new Instructor("Jane", "Smith", "jane.smith@example.com", "987654321", 8);
 
-            // Persist instructors
             em.persist(instructor1);
             em.persist(instructor2);
 
-            // Create SkiLessons
             SkiLesson lesson1 = new SkiLesson(
                     "Beginner Skiing",
                     LocalTime.of(10, 0),
@@ -64,12 +60,10 @@ public class Populator {
                     new SkiLesson.Location(45.764, 4.8357),
                     instructor1
             );
-            // Persist SkiLessons
             em.persist(lesson1);
             em.persist(lesson2);
             em.persist(lesson3);
 
-            // Commit the transaction
             em.getTransaction().commit();
 
         } catch (Exception e) {
@@ -103,6 +97,4 @@ public class Populator {
         UserDTO adminDTO = new UserDTO(admin.getUsername(), "admin123");
         return new UserDTO[]{userDTO, adminDTO};
     }
-
-
 }
